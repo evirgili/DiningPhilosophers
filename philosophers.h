@@ -5,11 +5,21 @@
 # include <pthread.h>
 #include <stdlib.h>
 # include <sys/time.h>
-
+# include <string.h>
 typedef struct s_philos
 {
 	pthread_t		philo;
-}	t_philos;
+	uint64_t		time;
+	int				pos;
+	int				d;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				num_meals;
+	int				count_meals;
+	int				last_meal;
+	pthread_mutex_t		*forks[2];
+}				t_philos;
 
 typedef struct s_indata
 {
@@ -18,8 +28,10 @@ typedef struct s_indata
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		num_times_eat;
+	uint64_t	start_time;
 	t_philos	*philos;
-	unsigned long	start_time;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		*print;
 	int		dead_philo;
 
 }		t_indata;
@@ -27,7 +39,8 @@ typedef struct s_indata
 void	start_pthread(t_indata *in_data);
 void	init_philo(t_indata *indata);
 int		ft_atoi(const char *s);
-int		time_creation(t_indata *in_data);
+size_t	ft_strlen(const char *s);
+uint64_t	time_creation(void);
 
 
 #endif
