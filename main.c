@@ -37,6 +37,8 @@ void	init_data(t_indata *indata, int argc, char **argv)
 	indata->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		indata->num_times_eat = ft_atoi(argv[5]);
+	else
+		indata->num_times_eat = 0;
 	indata->philos = (t_philos *) malloc(sizeof(t_philos) * indata->num_philo); //check NULL
 	indata->forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * indata->num_philo); // check NULL
 }
@@ -52,5 +54,11 @@ int main(int argc, char **argv)
 	}
 	init_data(&indata, argc, argv);
 	init_philo(&indata);
+	// int i = 0;
+	// while (i < indata.num_philo)
+	// {
+	// 	printf("philo %d  pos %d  odd  %d  die  %d  eat  %d  sleep  %d  meals need %d  count meals  %d  fork0  %p  fork1  %p\n", i, indata.philos[i].pos, indata.philos[i].d, indata.philos[i].time_die, indata.philos[i].time_eat, indata.philos[i].time_sleep, indata.philos[i].num_meals, indata.philos[i].count_meals, indata.philos[i].forks[0], indata.philos[i].forks[1]);
+	// 	i++;
+	// }
 	start_pthread(&indata);
 }

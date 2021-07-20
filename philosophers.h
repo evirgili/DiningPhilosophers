@@ -18,7 +18,9 @@ typedef struct s_philos
 	int				num_meals;
 	int				count_meals;
 	int				last_meal;
+	uint64_t		st_time;
 	pthread_mutex_t		*forks[2];
+	pthread_mutex_t		*print;
 }				t_philos;
 
 typedef struct s_indata
@@ -31,7 +33,7 @@ typedef struct s_indata
 	uint64_t	start_time;
 	t_philos	*philos;
 	pthread_mutex_t		*forks;
-	pthread_mutex_t		*print;
+	pthread_mutex_t		print;
 	int		dead_philo;
 
 }		t_indata;
@@ -41,6 +43,7 @@ void	init_philo(t_indata *indata);
 int		ft_atoi(const char *s);
 size_t	ft_strlen(const char *s);
 uint64_t	time_creation(void);
+uint64_t	time_cur(uint64_t start_time);
 
 
 #endif
